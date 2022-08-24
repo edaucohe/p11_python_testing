@@ -1,6 +1,4 @@
-# from server import index
-# from tests.conftest import client
-from server import loadCompetitions
+# from server import loadCompetitions
 
 
 def test_index(client):
@@ -24,8 +22,8 @@ def test_login_with_invalid_mail(client, invalid_club):
     assert response.status_code == 404
 
 
-def test_load_competitions():
-    competitions = loadCompetitions()
-    assert competitions is not None
-    assert isinstance(competitions, list)
-    assert len(competitions) > 0
+# def test_if_load_competitions():
+#     competitions = loadCompetitions()
+#     assert competitions is not None
+#     assert isinstance(competitions, list)
+#     assert len(competitions) > 0
