@@ -12,9 +12,9 @@ def client():
 @pytest.fixture
 def valid_club():
     return {
-        "name": "Simply Lift",
-        "email": "john@simplylift.co",
-        "points": "13"
+        "name": "Iron Temple",
+        "email": "admin@irontemple.com",
+        "points": "4"
     }
 
 
@@ -26,6 +26,14 @@ def invalid_club():
         "points": "13"
     }
 
+
+@pytest.fixture
+def valid_competition():
+    return {
+        "name": "Spring Festival",
+        "date": "2020-03-27 10:00:00",
+        "numberOfPlaces": "25"
+    }
 
 # def list_competitions():
 #     return [
