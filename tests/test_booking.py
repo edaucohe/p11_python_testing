@@ -56,7 +56,7 @@ def test_positif_points(client, valid_competition, valid_club):
 
 
 def test_points_greater_than_places(client, valid_competition, valid_club):
-    places_required = 15
+    places_required = 5
     data = {
         "club": valid_club["name"],
         "competition": valid_competition["name"],
@@ -82,3 +82,15 @@ def test_points_correctly_deducted(client, valid_competition, valid_club):
     assert "Great-booking complete" in message
     assert f"Points available: {points_available}" in message
 
+
+def test_booking_max_places(client, valid_competition, valid_club):
+    places_required = 13
+    data = {
+        "club": valid_club["name"],
+        "competition": valid_competition["name"],
+        "places": places_required
+    }
+    response = client.post('/purchasePlaces', data=data)
+    message = response.data.decode()
+    assert response.status_code == 200
+    assert "You cannot book more than 12 places" in message

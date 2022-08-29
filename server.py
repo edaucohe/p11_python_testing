@@ -61,6 +61,8 @@ def purchase_places():
         places_required = int(request.form['places'])
         if places_required <= 0:
             flash("Please choice a positif number of places")
+        elif places_required > 12:
+            flash("You cannot book more than 12 places")
         elif places_required > int(club["points"]):
             flash("You do not have enough points")
         else:
