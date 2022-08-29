@@ -29,8 +29,34 @@ def test_load_competitions_function():
     assert len(competitions) > 0
 
 
+def test_no_places_during_book(client, valid_competition, valid_club):
+    no_places = ""
+    data = {
+        "club": valid_club["name"],
+        "competition": valid_competition["name"],
+        "places": no_places
+    }
+    response = client.post('/purchasePlaces', data=data)
+    message = response.data.decode()
+    assert response.status_code == 200
+    assert "You did not send a number of places" in message
+
+
+def test_positif_points(client, valid_competition, valid_club):
+    places_deducted = -5
+    data = {
+        "club": valid_club["name"],
+        "competition": valid_competition["name"],
+        "places": places_deducted
+    }
+    response = client.post('/purchasePlaces', data=data)
+    message = response.data.decode()
+    assert response.status_code == 200
+    assert "Please choice a positif number of places" in message
+
+
 def test_points_greater_than_places(client, valid_competition, valid_club):
-    places_required = 30
+    places_required = 15
     data = {
         "club": valid_club["name"],
         "competition": valid_competition["name"],
@@ -40,3 +66,19 @@ def test_points_greater_than_places(client, valid_competition, valid_club):
     message = response.data.decode()
     assert response.status_code == 200
     assert "You do not have enough points" in message
+
+
+def test_points_correctly_deducted(client, valid_competition, valid_club):
+    places_deducted = 2
+    data = {
+        "club": valid_club["name"],
+        "competition": valid_competition["name"],
+        "places": places_deducted
+    }
+    points_available = int(valid_club["points"]) - places_deducted
+    response = client.post('/purchasePlaces', data=data)
+    message = response.data.decode()
+    assert response.status_code == 200
+    assert "Great-booking complete" in message
+    assert f"Points available: {points_available}" in message
+
