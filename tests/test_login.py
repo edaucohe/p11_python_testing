@@ -1,6 +1,3 @@
-# from server import loadCompetitions
-
-
 def test_index(client):
     response = client.get('/')
     assert response.status_code == 200
@@ -20,10 +17,3 @@ def test_login_with_invalid_mail(client, invalid_club):
     }
     response = client.post('/showSummary', data=data)
     assert response.status_code == 404
-
-
-# def test_if_load_competitions():
-#     competitions = loadCompetitions()
-#     assert competitions is not None
-#     assert isinstance(competitions, list)
-#     assert len(competitions) > 0
