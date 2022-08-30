@@ -1,3 +1,4 @@
+import datetime
 import json
 from flask import Flask,render_template,request,redirect,flash,url_for
 
@@ -38,11 +39,12 @@ def show_summary():
 
 
 @app.route('/book/<competition>/<club>')
-def book(competition,club):
-    foundClub = [c for c in clubs if c['name'] == club][0]
-    foundCompetition = [c for c in competitions if c['name'] == competition][0]
-    if foundClub and foundCompetition:
-        return render_template('booking.html',club=foundClub,competition=foundCompetition)
+def book(competition, club):
+    found_club = [c for c in clubs if c['name'] == club][0]
+    found_competition = [c for c in competitions if c['name'] == competition][0]
+
+    if found_club and found_competition:
+        return render_template('booking.html', club=found_club, competition=found_competition)
     else:
         flash("Something went wrong-please try again")
         return render_template('welcome.html', club=club, competitions=competitions)
@@ -58,6 +60,12 @@ def purchase_places():
         return render_template('welcome.html', club=club, competitions=competitions)
 
     else:
+        today = datetime.datetime.today()
+        date_competition = datetime.datetime.fromisoformat(competition["date"])
+        if date_competition < today:
+            flash("Competition is already finished. Please book another competition")
+            return render_template('welcome.html', club=club, competitions=competitions)
+
         places_required = int(request.form['places'])
         if places_required <= 0:
             flash("Please choice a positif number of places")

@@ -28,34 +28,18 @@ def invalid_club():
 
 
 @pytest.fixture
-def valid_competition():
+def past_competition():
     return {
         "name": "Spring Festival",
         "date": "2020-03-27 10:00:00",
         "numberOfPlaces": "25"
     }
 
-# def list_competitions():
-#     return [
-#         {
-#             "name": "Spring Festival",
-#             "date": "2020-03-27 10:00:00",
-#             "numberOfPlaces": "25"
-#         },
-#         {
-#             "name": "Fall Classic",
-#             "date": "2020-10-22 13:30:00",
-#             "numberOfPlaces": "13"
-#         }
-#     ]
 
-
-# @pytest.fixture
-# def invalid_competition():
-#     return [
-#         {
-#             "name": "Invalid competition",
-#             "date": "2021-11-11 11:11:11",
-#             "numberOfPlaces": "10"
-#         },
-#     ]
+@pytest.fixture
+def next_competition():
+    return {
+        "name": "Winter Tournament",
+        "date": "2022-12-12 10:00:00",
+        "numberOfPlaces": "24"
+    }
