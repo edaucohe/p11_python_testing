@@ -43,3 +43,23 @@ def next_competition():
         "date": "2022-12-12 10:00:00",
         "numberOfPlaces": "24"
     }
+
+
+@pytest.fixture
+def clubs():
+    return [
+        {
+            "name": "Simply Lift",
+            "email": "john@simplylift.co",
+            "points": "13"
+        },
+        {
+            "name": "Iron Temple",
+            "email": "admin@irontemple.com",
+            "points": "4"
+        },
+        {"name": "She Lifts",
+         "email": "kate@shelifts.co.uk",
+         "points": "12"
+         }
+    ]

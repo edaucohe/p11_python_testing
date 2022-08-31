@@ -107,16 +107,3 @@ def test_no_booking_past_competitions(client, past_competition, valid_club):
     message = response.data.decode()
     assert response.status_code == 200
     assert "Competition is already finished. Please book another competition" in message
-
-
-# def test_booking_next_competitions(client, next_competition, valid_club):
-#     places_required = 2
-#     data = {
-#         "club": valid_club["name"],
-#         "competition": next_competition["name"],
-#         "places": places_required
-#     }
-#     response = client.post('/purchasePlaces', data=data)
-#     message = response.data.decode()
-#     assert response.status_code == 200
-#     assert "Great-booking complete" in message
