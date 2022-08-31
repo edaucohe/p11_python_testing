@@ -58,8 +58,9 @@ def clubs():
             "email": "admin@irontemple.com",
             "points": "4"
         },
-        {"name": "She Lifts",
-         "email": "kate@shelifts.co.uk",
-         "points": "12"
+        {
+            "name": "She Lifts",
+            "email": "kate@shelifts.co.uk",
+            "points": "12"
          }
     ]
