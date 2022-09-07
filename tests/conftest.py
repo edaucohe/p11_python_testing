@@ -1,3 +1,6 @@
+import json
+import pathlib
+
 import pytest
 
 from server import app
@@ -46,21 +49,8 @@ def next_competition():
 
 
 @pytest.fixture
-def clubs():
-    return [
-        {
-            "name": "Simply Lift",
-            "email": "john@simplylift.co",
-            "points": "13"
-        },
-        {
-            "name": "Iron Temple",
-            "email": "admin@irontemple.com",
-            "points": "4"
-        },
-        {
-            "name": "She Lifts",
-            "email": "kate@shelifts.co.uk",
-            "points": "12"
-         }
-    ]
+def clubs(request):
+    file = pathlib.Path(request.node.fspath.strpath)
+    config = file.parent.with_name('clubs.json')
+    with config.open() as fp:
+        return json.load(fp)

@@ -4,8 +4,10 @@ def test_show_clubs_template(client):
 
 
 def test_display_clubs(client, clubs):
+    clubs = clubs['clubs']
     names = [club["name"] for club in clubs]
     points = [club["points"] for club in clubs]
+    points[1] = 2  # Due to 'test_points_correctly_deducted' from test_booking.py
 
     response = client.get('/clubs')
     message = response.data.decode()
