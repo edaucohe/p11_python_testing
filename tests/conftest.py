@@ -51,6 +51,6 @@ def next_competition():
 @pytest.fixture
 def clubs(request):
     file = pathlib.Path(request.node.fspath.strpath)
-    config = file.parent.with_name('clubs.json')
+    config = file.parent.parent.with_name('clubs.json')
     with config.open() as fp:
         return json.load(fp)
