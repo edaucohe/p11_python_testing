@@ -15,20 +15,6 @@ def test_book_function(client, valid_club, past_competition):
     assert response.status_code == 200
 
 
-def test_load_clubs_function():
-    clubs = load_clubs()
-    assert clubs is not None
-    assert isinstance(clubs, list)
-    assert len(clubs) > 0
-
-
-def test_load_competitions_function():
-    competitions = load_competitions()
-    assert competitions is not None
-    assert isinstance(competitions, list)
-    assert len(competitions) > 0
-
-
 def test_no_places_during_book(client, next_competition, valid_club):
     no_places = ""
     data = {
@@ -69,13 +55,13 @@ def test_points_greater_than_places(client, next_competition, valid_club):
 
 
 def test_points_correctly_deducted(client, next_competition, valid_club):
-    places_deducted = 2
+    places_deducted = 1
     data = {
         "club": valid_club["name"],
         "competition": next_competition["name"],
         "places": places_deducted
     }
-    points_available = int(valid_club["points"]) - places_deducted
+    points_available = int(valid_club["points"]) - places_deducted * 3
     response = client.post('/purchasePlaces', data=data)
     message = response.data.decode()
     assert response.status_code == 200
